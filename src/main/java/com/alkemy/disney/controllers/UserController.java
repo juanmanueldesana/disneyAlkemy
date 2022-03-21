@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
 
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper;
 
     @PostMapping(path = "/register")
     public UserRest registerUser(@RequestBody @Valid UserDetailRequestModel userDetails) {

@@ -39,7 +39,6 @@ public class MovieEntity implements Serializable{
     @ManyToMany
     private List<CharacterEntity> characters;
 
-    @Column
     @OneToOne
     private PhotoEntity photo;
 

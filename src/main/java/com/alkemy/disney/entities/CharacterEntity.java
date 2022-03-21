@@ -35,10 +35,9 @@ public class CharacterEntity implements Serializable{
     @Column(nullable = false)
     private String history;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "characters")
     private List<MovieEntity> movies;
 
-    @Column(nullable = false)
     @OneToOne
     private PhotoEntity photo; 
 

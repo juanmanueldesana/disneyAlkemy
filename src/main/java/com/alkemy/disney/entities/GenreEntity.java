@@ -18,7 +18,6 @@ public class GenreEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     @OneToOne
     private PhotoEntity photo;
 
