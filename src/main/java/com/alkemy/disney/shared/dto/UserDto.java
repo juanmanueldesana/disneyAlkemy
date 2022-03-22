@@ -1,6 +1,8 @@
 package com.alkemy.disney.shared.dto;
 
-public class UserDto {
+import java.io.Serializable;
+
+public class UserDto implements Serializable{
     
     private long id;
     private String username;
