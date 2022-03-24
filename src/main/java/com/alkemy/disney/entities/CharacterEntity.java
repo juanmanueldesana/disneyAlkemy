@@ -3,6 +3,7 @@ package com.alkemy.disney.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -38,7 +39,8 @@ public class CharacterEntity implements Serializable{
     @ManyToMany(mappedBy = "characters")
     private List<MovieEntity> movies;
 
-    @OneToOne
+
+    @OneToOne(cascade = { CascadeType.REMOVE})
     private PhotoEntity photo; 
 
     public String getCharacterId() {

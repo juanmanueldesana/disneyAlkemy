@@ -83,6 +83,8 @@ public class PhotoService implements PhotoServiceInterface{
             if (file.exists() && file.canRead()) {
                 file.delete();
             }
+
+            photoRepository.delete(photoEntity);
     }
     
 }

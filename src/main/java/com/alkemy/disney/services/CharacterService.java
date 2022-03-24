@@ -73,7 +73,7 @@ public class CharacterService implements CharacterServiceInterface {
     public void deleteCharacter(String idCharacter) {
         
         CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
-
+        photoService.deletePhoto(characterEntity);
         characterRepository.delete(characterEntity);
         
     }
@@ -82,6 +82,48 @@ public class CharacterService implements CharacterServiceInterface {
     public List<CharacterDto> getAllCharacters() {
        
         List<CharacterEntity> characterEntities = (List<CharacterEntity>) characterRepository.findAll();
+        List<CharacterDto> characterDtos = new ArrayList<>();
+
+        for (CharacterEntity characterEntity : characterEntities) {
+            CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
+            characterDtos.add(characterDto);
+        }
+
+        return characterDtos;
+    }
+
+    @Override
+    public List<CharacterDto> getCharactersByName(String name) {
+        
+        List<CharacterEntity> characterEntities = characterRepository.findByNameIgnoreCaseContaining(name);
+        List<CharacterDto> characterDtos = new ArrayList<>();
+
+        for (CharacterEntity characterEntity : characterEntities) {
+            CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
+            characterDtos.add(characterDto);
+        }
+
+        return characterDtos;
+    }
+
+    @Override
+    public List<CharacterDto> getCharactersByAge(Integer age) {
+        
+        List<CharacterEntity> characterEntities = characterRepository.findByAge(age);
+        List<CharacterDto> characterDtos = new ArrayList<>();
+
+        for (CharacterEntity characterEntity : characterEntities) {
+            CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
+            characterDtos.add(characterDto);
+        }
+        
+        return characterDtos;
+    }
+
+    @Override
+    public List<CharacterDto> getCharactersByWeight(Double weight) {
+        
+        List<CharacterEntity> characterEntities = characterRepository.findByWeight(weight);
         List<CharacterDto> characterDtos = new ArrayList<>();
 
         for (CharacterEntity characterEntity : characterEntities) {
