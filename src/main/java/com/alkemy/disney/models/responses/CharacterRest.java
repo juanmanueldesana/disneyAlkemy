@@ -1,5 +1,8 @@
 package com.alkemy.disney.models.responses;
 
+import java.util.List;
+
+import com.alkemy.disney.entities.MovieEntity;
 import com.alkemy.disney.entities.PhotoEntity;
 
 public class CharacterRest {
@@ -9,6 +12,7 @@ public class CharacterRest {
     private Integer age;
     private Double weight;
     private String history;
+    private List<MovieEntity> movies;
     private PhotoEntity photo;
     
     public String getCharacterId() {
@@ -58,5 +62,14 @@ public class CharacterRest {
     public void setPhoto(PhotoEntity photo) {
         this.photo = photo;
     }
+
+    public List<MovieEntity> getMovies() {
+        return this.movies;
+    }
+
+    public void setMovies(List<MovieEntity> movies) {
+        this.movies = movies;
+    }
+
 
 }

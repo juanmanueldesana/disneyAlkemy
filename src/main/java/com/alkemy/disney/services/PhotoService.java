@@ -61,6 +61,9 @@ public class PhotoService implements PhotoServiceInterface{
     public PhotoEntity updatePhoto(String id, MultipartFile multipartfile) {
 
         try {
+
+            // if()
+
             CharacterEntity characterEntity = characterRepository.findByCharacterId(id);
             PhotoEntity photoEntity = new PhotoEntity();
 
