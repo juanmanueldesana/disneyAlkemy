@@ -6,11 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-import com.alkemy.disney.entities.CharacterEntity;
 import com.alkemy.disney.entities.PhotoEntity;
-import com.alkemy.disney.repositories.CharacterRepository;
-import com.alkemy.disney.repositories.GenreRepository;
-import com.alkemy.disney.repositories.MovieRepository;
 import com.alkemy.disney.repositories.PhotoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +20,6 @@ public class PhotoService implements PhotoServiceInterface{
 
     @Autowired
     private PhotoRepository photoRepository;
-
-    @Autowired
-    private CharacterRepository characterRepository;
-
-    @Autowired
-    private GenreRepository genreRepository;
-
-    @Autowired
-    private MovieRepository movieRepository;
 
     public PhotoEntity savePhoto(MultipartFile file) {
 
@@ -58,29 +45,9 @@ public class PhotoService implements PhotoServiceInterface{
         return null;
     }
 
-    public PhotoEntity updatePhoto(String id, MultipartFile multipartfile) {
+    public void deleteOldPhoto(String oldPhotoId) {
 
-        try {
-
-            // if()
-
-            CharacterEntity characterEntity = characterRepository.findByCharacterId(id);
-            PhotoEntity photoEntity = new PhotoEntity();
-
-            photoEntity = savePhoto(multipartfile);
-            deletePhoto(characterEntity);
-            return photoEntity;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public void deletePhoto(CharacterEntity characterEntity) {
-
-            PhotoEntity photoEntity = characterEntity.getPhoto();
+            PhotoEntity photoEntity = photoRepository.findById(oldPhotoId).get();
             Path rootPath = Paths.get("web-files").resolve(photoEntity.getFileName()).toAbsolutePath();
             File file = rootPath.toFile();
             if (file.exists() && file.canRead()) {
@@ -89,5 +56,5 @@ public class PhotoService implements PhotoServiceInterface{
 
             photoRepository.delete(photoEntity);
     }
-    
+
 }

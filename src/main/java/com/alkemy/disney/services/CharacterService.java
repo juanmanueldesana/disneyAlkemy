@@ -54,15 +54,17 @@ public class CharacterService implements CharacterServiceInterface {
 
     @Override
     public CharacterDto updateCharacter(String idCharacter, CharacterDto character, MultipartFile file) {
-    
+
         CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
         characterEntity.setName(character.getName());
         characterEntity.setAge(character.getAge());
         characterEntity.setWeight(character.getWeight());
         characterEntity.setHistory(character.getHistory());
-        PhotoEntity photo = photoService.updatePhoto(idCharacter, file);
+        String oldPhotoId = characterEntity.getPhoto().getPhotoId();
+        PhotoEntity photo = photoService.savePhoto(file);
         characterEntity.setPhoto(photo);
         characterRepository.save(characterEntity);
+        photoService.deleteOldPhoto(oldPhotoId);
 
         CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
 
@@ -73,8 +75,8 @@ public class CharacterService implements CharacterServiceInterface {
     public void deleteCharacter(String idCharacter) {
         
         CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
-        photoService.deletePhoto(characterEntity);
         characterRepository.delete(characterEntity);
+        photoService.deleteOldPhoto(idCharacter);
         
     }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -39,7 +40,7 @@ public class MovieEntity implements Serializable{
     @ManyToMany
     private List<CharacterEntity> characters;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.REMOVE})
     private PhotoEntity photo;
 
     public String getMovieId() {

@@ -2,6 +2,7 @@ package com.alkemy.disney.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class GenreEntity {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.REMOVE})
     private PhotoEntity photo;
 
     @ManyToMany

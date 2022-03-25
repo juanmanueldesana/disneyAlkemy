@@ -69,8 +69,20 @@ public class MovieService implements MovieServiceInterface{
 
     @Override
     public MovieDto updateMovie(String idMovie, MovieDto movie, MultipartFile file) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        movieEntity.setTitle(movie.getTitle());
+        movieEntity.setReleaseDate(movie.getReleaseDate());
+        movieEntity.setClassification(movie.getClassification());
+        String oldPhotoId = movieEntity.getPhoto().getPhotoId();
+        PhotoEntity photo = photoService.savePhoto(file);
+        movieEntity.setPhoto(photo);
+        movieRepository.save(movieEntity);
+        photoService.deleteOldPhoto(oldPhotoId);
+        
+        MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+
+        return movieDto;
     }
 
     @Override
