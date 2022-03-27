@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.alkemy.disney.models.requests.MovieCreateRequestModel;
+import com.alkemy.disney.models.responses.MovieListRest;
 import com.alkemy.disney.models.responses.MovieRest;
 import com.alkemy.disney.models.responses.OperationStatusModel;
 import com.alkemy.disney.services.MovieServiceInterface;
@@ -45,11 +46,11 @@ public class MovieController {
     }
 
     @GetMapping(params = "order")
-    public List<MovieRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order) {
+    public List<MovieListRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order) {
         List<MovieDto> movieDtoList = movieService.getAllMovies(order);
-        List<MovieRest> movieToReturn = new ArrayList<>();
+        List<MovieListRest> movieToReturn = new ArrayList<>();
         for (MovieDto movieDto : movieDtoList) {
-            MovieRest movieRest = mapper.map(movieDto, MovieRest.class);
+            MovieListRest movieRest = mapper.map(movieDto, MovieListRest.class);
             movieToReturn.add(movieRest);
         }
         return movieToReturn;
