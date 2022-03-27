@@ -1,5 +1,8 @@
 package com.alkemy.disney.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.alkemy.disney.models.requests.MovieCreateRequestModel;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +44,17 @@ public class MovieController {
         return movieToReturn;
     }
 
+    @GetMapping(params = "order")
+    public List<MovieRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order) {
+        List<MovieDto> movieDtoList = movieService.getAllMovies(order);
+        List<MovieRest> movieToReturn = new ArrayList<>();
+        for (MovieDto movieDto : movieDtoList) {
+            MovieRest movieRest = mapper.map(movieDto, MovieRest.class);
+            movieToReturn.add(movieRest);
+        }
+        return movieToReturn;
+    }
+
     @GetMapping("/{id}")
     public MovieRest getMovie(@PathVariable String id) {
 
@@ -48,6 +63,31 @@ public class MovieController {
 
         return movieToReturn;
     }
+
+    @GetMapping(params = "name")
+    public List<MovieRest> getMovieByName(@RequestParam String name) {
+
+        List<MovieDto> movieDtoList = movieService.getMoviesByName(name);
+        List<MovieRest> movieToReturn = new ArrayList<>();
+        for (MovieDto movieDto : movieDtoList) {
+            movieToReturn.add(mapper.map(movieDto, MovieRest.class));
+        }
+
+        return movieToReturn;
+    }
+
+    @GetMapping(params = "genreId")
+    public List<MovieRest> getMovieByGenre(@RequestParam String genreId) {
+
+        List<MovieDto> movieDtoList = movieService.getMoviesByGenre(genreId);
+        List<MovieRest> movieToReturn = new ArrayList<>();
+        for (MovieDto movieDto : movieDtoList) {
+            movieToReturn.add(mapper.map(movieDto, MovieRest.class));
+        }
+
+        return movieToReturn;
+    }
+
 
     @PutMapping("/{id}")
     public MovieRest updateMovie(@PathVariable String id, @RequestPart @Valid MovieCreateRequestModel movieCreateRequestModel,

@@ -1,5 +1,6 @@
 package com.alkemy.disney.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,20 +55,31 @@ public class MovieService implements MovieServiceInterface{
 
     @Override
     public List<MovieDto> getMoviesByName(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        List<MovieEntity> movieEntityList = movieRepository.findByNameIgnoreCaseContaining(name);
+        List<MovieDto> movieDtoList = new ArrayList<>();
+
+        for(MovieEntity movieEntity : movieEntityList){
+            MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDtoList.add(movieDto);
+        }
+
+        return movieDtoList;
     }
 
-    @Override
-    public List<MovieDto> getMoviesByYear(Integer year) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
-    public List<MovieDto> getMoviesByGenre(String genre) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<MovieDto> getMoviesByGenre(String genreId) {
+        
+        List<MovieEntity> movieEntityList = movieRepository.findByGenreId(genreId);
+        List<MovieDto> movieDtoList = new ArrayList<>();
+
+        for(MovieEntity movieEntity : movieEntityList){
+            MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDtoList.add(movieDto);
+        }
+
+        return movieDtoList;
     }
 
     @Override
@@ -99,9 +111,23 @@ public class MovieService implements MovieServiceInterface{
     }
 
     @Override
-    public List<MovieDto> getAllMovies() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<MovieDto> getAllMovies(String order) {
+        
+        List<MovieEntity> movieEntityList = new ArrayList<>();
+        if(order.equalsIgnoreCase("asc")){
+            movieEntityList = movieRepository.findAllOrderByReleaseDateAsc();
+        }else{
+            movieEntityList = movieRepository.findAllOrderByReleaseDateDesc();
+        }
+
+        List<MovieDto> movieDtoList = new ArrayList<>();
+        
+        for(MovieEntity movieEntity : movieEntityList){
+            MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDtoList.add(movieDto);
+        }
+
+        return movieDtoList;
     }
     
 }
