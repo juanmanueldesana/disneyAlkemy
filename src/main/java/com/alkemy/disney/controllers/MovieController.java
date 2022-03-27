@@ -4,11 +4,14 @@ import javax.validation.Valid;
 
 import com.alkemy.disney.models.requests.MovieCreateRequestModel;
 import com.alkemy.disney.models.responses.MovieRest;
+import com.alkemy.disney.models.responses.OperationStatusModel;
 import com.alkemy.disney.services.MovieServiceInterface;
 import com.alkemy.disney.shared.dto.MovieDto;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +40,15 @@ public class MovieController {
         return movieToReturn;
     }
 
+    @GetMapping("/{id}")
+    public MovieRest getMovie(@PathVariable String id) {
+
+        MovieDto movieDto = movieService.getMovie(id);
+        MovieRest movieToReturn = mapper.map(movieDto, MovieRest.class);
+
+        return movieToReturn;
+    }
+
     @PutMapping("/{id}")
     public MovieRest updateMovie(@PathVariable String id, @RequestPart @Valid MovieCreateRequestModel movieCreateRequestModel,
             @ModelAttribute MultipartFile file) {
@@ -45,5 +57,17 @@ public class MovieController {
         MovieRest movieToReturn = mapper.map(updatedMovie, MovieRest.class);
         return movieToReturn;
     }
+
+    @DeleteMapping
+    public OperationStatusModel deleteMovie(@PathVariable String id) {
+        OperationStatusModel operationStatusModel = new OperationStatusModel();
+
+        operationStatusModel.setName("DELETE");
+        movieService.deleteMovie(id);
+        operationStatusModel.setResult("SUCCESS");
+        
+        return operationStatusModel;
+    }
+
 
 }

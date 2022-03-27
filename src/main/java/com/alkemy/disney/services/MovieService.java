@@ -45,8 +45,11 @@ public class MovieService implements MovieServiceInterface{
 
     @Override
     public MovieDto getMovie(String idMovie) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+        return movieDto;
+
     }
 
     @Override
@@ -87,7 +90,11 @@ public class MovieService implements MovieServiceInterface{
 
     @Override
     public void deleteMovie(String idMovie) {
-        // TODO Auto-generated method stub
+        
+        MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        String photoId = movieEntity.getPhoto().getPhotoId();
+        movieRepository.delete(movieEntity);
+        photoService.deleteOldPhoto(photoId);
         
     }
 
