@@ -99,7 +99,7 @@ public class MovieController {
         return movieToReturn;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public OperationStatusModel deleteMovie(@PathVariable String id) {
         OperationStatusModel operationStatusModel = new OperationStatusModel();
 
