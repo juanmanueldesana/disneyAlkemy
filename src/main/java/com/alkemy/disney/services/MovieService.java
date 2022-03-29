@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.alkemy.disney.entities.GenreEntity;
 import com.alkemy.disney.entities.MovieEntity;
 import com.alkemy.disney.entities.PhotoEntity;
+import com.alkemy.disney.repositories.GenreRepository;
 import com.alkemy.disney.repositories.MovieRepository;
 import com.alkemy.disney.shared.dto.MovieDto;
 
@@ -24,6 +26,9 @@ public class MovieService implements MovieServiceInterface{
     private MovieRepository movieRepository;
 
     @Autowired
+    private GenreRepository genreRepository;
+
+    @Autowired
     private ModelMapper mapper;
 
     
@@ -35,12 +40,17 @@ public class MovieService implements MovieServiceInterface{
         movieEntity.setReleaseDate(movie.getReleaseDate());
         movieEntity.setClassification(movie.getClassification());
         movieEntity.setMovieId(UUID.randomUUID().toString());
+        List<GenreEntity> genreId = new ArrayList<>();
+        GenreEntity genre = genreRepository.findByGenreId(movie.getGenres().getGenreId());
+        genreId.add(genre);
+        movieEntity.setGenres(genreId);
 
         PhotoEntity photo = photoService.savePhoto(file);
         movieEntity.setPhoto(photo);
         movieRepository.save(movieEntity);
 
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+        movieDto.setGenre(movieEntity.getGenres().get(0));
         return movieDto;
     }
 
@@ -54,9 +64,9 @@ public class MovieService implements MovieServiceInterface{
     }
 
     @Override
-    public List<MovieDto> getMoviesByName(String name) {
+    public List<MovieDto> getMoviesByName(String title) {
         
-        List<MovieEntity> movieEntityList = movieRepository.findByNameIgnoreCaseContaining(name);
+        List<MovieEntity> movieEntityList = movieRepository.findByTitleIgnoreCaseContaining(title);
         List<MovieDto> movieDtoList = new ArrayList<>();
 
         for(MovieEntity movieEntity : movieEntityList){
@@ -71,7 +81,7 @@ public class MovieService implements MovieServiceInterface{
     @Override
     public List<MovieDto> getMoviesByGenre(String genreId) {
         
-        List<MovieEntity> movieEntityList = movieRepository.findByGenreId(genreId);
+        List<MovieEntity> movieEntityList = movieRepository.findByGenres(genreId);
         List<MovieDto> movieDtoList = new ArrayList<>();
 
         for(MovieEntity movieEntity : movieEntityList){
@@ -115,9 +125,9 @@ public class MovieService implements MovieServiceInterface{
         
         List<MovieEntity> movieEntityList = new ArrayList<>();
         if(order.equalsIgnoreCase("asc")){
-            movieEntityList = movieRepository.findAllOrderByReleaseDateAsc();
+            movieEntityList = movieRepository.findAllByOrderByReleaseDateAsc();
         }else{
-            movieEntityList = movieRepository.findAllOrderByReleaseDateDesc();
+            movieEntityList = movieRepository.findAllByOrderByReleaseDateDesc();
         }
 
         List<MovieDto> movieDtoList = new ArrayList<>();

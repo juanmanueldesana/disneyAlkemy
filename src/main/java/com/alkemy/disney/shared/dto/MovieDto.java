@@ -3,6 +3,7 @@ package com.alkemy.disney.shared.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.alkemy.disney.entities.GenreEntity;
 import com.alkemy.disney.entities.PhotoEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,6 +19,7 @@ public class MovieDto {
 
     private List<CharacterDto> characters;
     private PhotoEntity photo;
+    private GenreEntity genres;
     
 
     public String getMovieId() {
@@ -67,6 +69,15 @@ public class MovieDto {
     public void setPhoto(PhotoEntity photo) {
         this.photo = photo;
     }
+
+    public GenreEntity getGenres() {
+        return this.genres;
+    }
+
+    public void setGenre(GenreEntity genre) {
+        this.genres = genre;
+    }
+
 
 
 }

@@ -39,7 +39,6 @@ public class CharacterEntity implements Serializable{
     @ManyToMany(mappedBy = "characters")
     private List<MovieEntity> movies;
 
-
     @OneToOne(cascade = { CascadeType.REMOVE})
     private PhotoEntity photo; 
 

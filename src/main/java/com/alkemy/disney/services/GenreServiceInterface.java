@@ -9,9 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface GenreServiceInterface {
     
     public GenreDto createGenre(GenreDto genre, MultipartFile file);
-    public GenreDto getGenreById(String id);
+    public GenreDto getGenre(String genreId);
     public List<GenreDto> getAllGenres();
-    public GenreDto updateGenre(GenreDto genre, MultipartFile file, String id);
-    public void deleteGenre(String id);
+    public GenreDto updateGenre(GenreDto genre, MultipartFile file, String genreId);
+    public void deleteGenre(String genreIdid);
 
 }

@@ -1,6 +1,8 @@
 package com.alkemy.disney;
 
+import com.alkemy.disney.models.responses.MovieRest;
 import com.alkemy.disney.security.AppProperties;
+import com.alkemy.disney.shared.dto.MovieDto;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -37,6 +39,9 @@ public class DisneyApplication {
 	@Bean
 	public ModelMapper modelMapper(){
 		ModelMapper mapper = new ModelMapper();
+
+		//skipeo el genero para que no haga un ciclo infinito al devolver MovieRest
+		mapper.typeMap(MovieDto.class, MovieRest.class).addMappings(m -> m.skip(MovieRest::setGenres));
 		return mapper;
 	}
 

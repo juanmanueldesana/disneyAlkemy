@@ -43,6 +43,9 @@ public class MovieEntity implements Serializable{
     @OneToOne(cascade = { CascadeType.REMOVE})
     private PhotoEntity photo;
 
+    @ManyToMany
+    private List<GenreEntity> genres;
+
     public String getMovieId() {
         return this.movieId;
     }
@@ -90,6 +93,15 @@ public class MovieEntity implements Serializable{
     public void setPhoto(PhotoEntity photo) {
         this.photo = photo;
     }
+
+    public List<GenreEntity> getGenres() {
+        return this.genres;
+    }
+
+    public void setGenres(List<GenreEntity> genres) {
+        this.genres = genres;
+    }
+
 
 
 }

@@ -65,10 +65,10 @@ public class MovieController {
         return movieToReturn;
     }
 
-    @GetMapping(params = "name")
-    public List<MovieRest> getMovieByName(@RequestParam String name) {
+    @GetMapping(params = "title")
+    public List<MovieRest> getMovieByTitle(@RequestParam String title) {
 
-        List<MovieDto> movieDtoList = movieService.getMoviesByName(name);
+        List<MovieDto> movieDtoList = movieService.getMoviesByName(title);
         List<MovieRest> movieToReturn = new ArrayList<>();
         for (MovieDto movieDto : movieDtoList) {
             movieToReturn.add(mapper.map(movieDto, MovieRest.class));

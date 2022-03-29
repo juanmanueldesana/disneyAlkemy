@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/genres")
@@ -42,17 +43,17 @@ public class GenreController {
 
     @GetMapping("/{id}")
     public GenreRest getGenre(@PathVariable String id) {
-        GenreDto genreDto = genreService.getGenreById(id);
+        GenreDto genreDto = genreService.getGenre(id);
         GenreRest genreToReturn = mapper.map(genreDto, GenreRest.class);
         return genreToReturn;
     }
 
     @GetMapping
-    public List<GenreListRest> getAllGenres() {
+    public List<GenreRest> getAllGenres() {
         List<GenreDto> genreDtoList = genreService.getAllGenres();
-        List<GenreListRest> genreToReturn = new ArrayList<>();
+        List<GenreRest> genreToReturn = new ArrayList<>();
         for (GenreDto genreDto : genreDtoList) {
-            GenreListRest genreRest = mapper.map(genreDto, GenreListRest.class);
+            GenreRest genreRest = mapper.map(genreDto, GenreRest.class);
             genreToReturn.add(genreRest);
         }
         return genreToReturn;

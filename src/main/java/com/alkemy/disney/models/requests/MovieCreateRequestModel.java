@@ -20,6 +20,9 @@ public class MovieCreateRequestModel {
     @NotNull(message = "Classification is required")
     private Integer classification;
 
+    @NotEmpty(message = "Genre is required")
+    private String genreId;
+
     public String getTitle() {
         return this.title;
     }
@@ -43,5 +46,14 @@ public class MovieCreateRequestModel {
     public void setClassification(Integer classification) {
         this.classification = classification;
     }
+
+    public String getGenreId() {
+        return this.genreId;
+    }
+
+    public void setGenreId(String genreId) {
+        this.genreId = genreId;
+    }
+
 
 }

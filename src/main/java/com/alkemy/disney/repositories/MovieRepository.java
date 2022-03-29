@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends PagingAndSortingRepository<MovieEntity, Long> {
 
     MovieEntity findByMovieId(String movieId);
-    List<MovieEntity> findByGenreId(String genreId);
-    List<MovieEntity> findByNameIgnoreCaseContaining(String name);
-    List<MovieEntity> findAllOrderByReleaseDateDesc();
-    List<MovieEntity> findAllOrderByReleaseDateAsc();
+    List<MovieEntity> findByGenres(String genreId);
+    List<MovieEntity> findByTitleIgnoreCaseContaining(String title);
+    List<MovieEntity> findAllByOrderByReleaseDateDesc();
+    List<MovieEntity> findAllByOrderByReleaseDateAsc();
 }
     

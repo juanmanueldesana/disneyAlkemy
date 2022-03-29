@@ -15,6 +15,7 @@ public class MovieRest {
     
     private List<CharacterRest> characters;
     private PhotoEntity photo;
+    private GenreRest genres;
     
     
     public String getMovieId() {
@@ -64,5 +65,16 @@ public class MovieRest {
     public void setPhoto(PhotoEntity photo) {
         this.photo = photo;
     }
+
+    public GenreRest getGenres() {
+        return this.genres;
+    }
+
+    public void setGenres(GenreRest genres) {
+        this.genres = genres;
+    }
+
+
+
 
 }
