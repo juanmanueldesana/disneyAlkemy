@@ -40,12 +40,17 @@ public class MovieController {
     public MovieRest createMovie(@RequestPart @Valid MovieCreateRequestModel movieCreateRequestModel,
             @ModelAttribute MultipartFile file) {
         MovieDto movieDto = mapper.map(movieCreateRequestModel, MovieDto.class);
+
+        if(file == null) {
+            throw new RuntimeException("File is required");
+        }
+
         MovieDto createdMovie = movieService.createMovie(movieDto, file);
         MovieRest movieToReturn = mapper.map(createdMovie, MovieRest.class);
         return movieToReturn;
     }
 
-    @GetMapping(params = "order")
+    @GetMapping
     public List<MovieListRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order) {
         List<MovieDto> movieDtoList = movieService.getAllMovies(order);
         List<MovieListRest> movieToReturn = new ArrayList<>();
@@ -94,6 +99,11 @@ public class MovieController {
     public MovieRest updateMovie(@PathVariable String id, @RequestPart @Valid MovieCreateRequestModel movieCreateRequestModel,
             @ModelAttribute MultipartFile file) {
         MovieDto movieDto = mapper.map(movieCreateRequestModel, MovieDto.class);
+
+        if(file == null) {
+            throw new RuntimeException("File is required");
+        }
+
         MovieDto updatedMovie = movieService.updateMovie(id, movieDto, file);
         MovieRest movieToReturn = mapper.map(updatedMovie, MovieRest.class);
         return movieToReturn;

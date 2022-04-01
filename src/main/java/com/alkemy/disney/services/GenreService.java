@@ -85,9 +85,7 @@ public class GenreService implements GenreServiceInterface {
     public void deleteGenre(String id) {
         
         GenreEntity genreEntity = genreRepository.findByGenreId(id);
-        String oldPhotoId = genreEntity.getPhoto().getPhotoId();
         genreRepository.delete(genreEntity);
-        photoService.deleteOldPhoto(oldPhotoId);
         
     }
 

@@ -76,7 +76,6 @@ public class CharacterService implements CharacterServiceInterface {
         
         CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
         characterRepository.delete(characterEntity);
-        photoService.deleteOldPhoto(idCharacter);
         
     }
 

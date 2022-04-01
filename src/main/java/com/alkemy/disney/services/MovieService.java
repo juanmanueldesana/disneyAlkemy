@@ -59,6 +59,7 @@ public class MovieService implements MovieServiceInterface{
         
         MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+        movieDto.setGenre(movieEntity.getGenres().get(0));
         return movieDto;
 
     }
@@ -71,6 +72,7 @@ public class MovieService implements MovieServiceInterface{
 
         for(MovieEntity movieEntity : movieEntityList){
             MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDto.setGenre(movieEntity.getGenres().get(0));
             movieDtoList.add(movieDto);
         }
 
@@ -86,6 +88,7 @@ public class MovieService implements MovieServiceInterface{
 
         for(MovieEntity movieEntity : movieEntityList){
             MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDto.setGenre(movieEntity.getGenres().get(0));
             movieDtoList.add(movieDto);
         }
 
@@ -106,7 +109,7 @@ public class MovieService implements MovieServiceInterface{
         photoService.deleteOldPhoto(oldPhotoId);
         
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
-
+        movieDto.setGenre(movieEntity.getGenres().get(0));
         return movieDto;
     }
 
@@ -114,9 +117,7 @@ public class MovieService implements MovieServiceInterface{
     public void deleteMovie(String idMovie) {
         
         MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
-        String photoId = movieEntity.getPhoto().getPhotoId();
         movieRepository.delete(movieEntity);
-        photoService.deleteOldPhoto(photoId);
         
     }
 
@@ -134,6 +135,7 @@ public class MovieService implements MovieServiceInterface{
         
         for(MovieEntity movieEntity : movieEntityList){
             MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDto.setGenre(movieEntity.getGenres().get(0));
             movieDtoList.add(movieDto);
         }
 
