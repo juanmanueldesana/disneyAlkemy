@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity(name = "genres")
@@ -57,6 +59,7 @@ public class GenreEntity {
         this.photo = photo;
     }
 
+    @JsonBackReference
     public List<MovieEntity> getMovies() {
         return this.movies;
     }

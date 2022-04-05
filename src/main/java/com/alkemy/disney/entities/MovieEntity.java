@@ -14,7 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -78,6 +80,7 @@ public class MovieEntity implements Serializable{
         this.classification = classification;
     }
 
+    @JsonBackReference
     public List<CharacterEntity> getCharacters() {
         return this.characters;
     }
@@ -94,6 +97,7 @@ public class MovieEntity implements Serializable{
         this.photo = photo;
     }
 
+    @JsonManagedReference
     public List<GenreEntity> getGenres() {
         return this.genres;
     }

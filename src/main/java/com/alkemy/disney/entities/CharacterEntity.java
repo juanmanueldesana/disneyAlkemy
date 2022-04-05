@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity(name = "characters")
@@ -82,6 +84,7 @@ public class CharacterEntity implements Serializable{
         this.history = history;
     }
 
+    @JsonManagedReference
     public List<MovieEntity> getMovies() {
         return this.movies;
     }

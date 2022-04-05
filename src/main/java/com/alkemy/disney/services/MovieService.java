@@ -51,6 +51,7 @@ public class MovieService implements MovieServiceInterface{
 
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
         movieDto.setGenre(movieEntity.getGenres().get(0));
+        avoidRecursiveCharacterMovies(movieDto);
         return movieDto;
     }
 
@@ -60,6 +61,11 @@ public class MovieService implements MovieServiceInterface{
         MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
         movieDto.setGenre(movieEntity.getGenres().get(0));
+
+        for(int i = 0; i < movieDto.getCharacters().size(); i++){
+            movieDto.getCharacters().get(i).setMovies(null);
+        }
+        avoidRecursiveCharacterMovies(movieDto);
         return movieDto;
 
     }
@@ -110,6 +116,8 @@ public class MovieService implements MovieServiceInterface{
         
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
         movieDto.setGenre(movieEntity.getGenres().get(0));
+
+        avoidRecursiveCharacterMovies(movieDto);
         return movieDto;
     }
 
@@ -140,6 +148,12 @@ public class MovieService implements MovieServiceInterface{
         }
 
         return movieDtoList;
+    }
+
+    private void avoidRecursiveCharacterMovies(MovieDto movieDto){
+        for(int i = 0; i < movieDto.getCharacters().size(); i++){
+            movieDto.getCharacters().get(i).setMovies(null);
+        }
     }
     
 }

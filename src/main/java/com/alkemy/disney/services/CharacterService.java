@@ -160,13 +160,6 @@ public class CharacterService implements CharacterServiceInterface {
             characterRepository.save(characterEntity);
             CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
             
-            
-            //Devuelvo el Dto con el Genero y Personajes de las peliculas en null para evitar una recursión en la respuesta
-            for(int i = 0; i < characterDto.getMovies().size(); i++) {
-                characterDto.getMovies().get(i).setGenres(null);
-                characterDto.getMovies().get(i).setCharacters(null);
-            }
-
             return characterDto;
         } else {
             return null;
@@ -183,10 +176,6 @@ public class CharacterService implements CharacterServiceInterface {
             }
             characterRepository.save(characterEntity);
             CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
-
-            for(int i = 0; i < characterDto.getMovies().size(); i++) {
-                characterDto.getMovies().get(i).setGenres(null);
-            }
 
             return characterDto;
         } else {
