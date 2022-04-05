@@ -37,7 +37,7 @@ public class MovieEntity implements Serializable{
     @Column(nullable = false)
     private Integer classification;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<CharacterEntity> characters;
 
     @OneToOne(cascade = { CascadeType.REMOVE})

@@ -14,6 +14,8 @@ public interface CharacterServiceInterface {
     public List<CharacterDto> getCharactersByAge(Integer age);
     public List<CharacterDto> getCharactersByWeight(Double weight);
     public CharacterDto updateCharacter(String idCharacter ,CharacterDto character, MultipartFile file);
+    public CharacterDto addMoviesToCharacter(String idCharacter, List<String> moviesId);
+    public CharacterDto removeMoviesFromCharacter(String idCharacter, List<String> moviesId);
     public void deleteCharacter(String idCharacter);
     public List<CharacterDto> getAllCharacters();
 }
