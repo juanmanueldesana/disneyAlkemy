@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -114,13 +113,6 @@ public class CharacterController {
         return characterToReturn;
     }
 
-    @PutMapping("/{id}/movies")
-    public CharacterRest addMoviesToCharacter (@Valid @PathVariable String id, @Valid @RequestBody List<String> moviesId) {
-        CharacterDto characterDto = characterService.addMoviesToCharacter(id, moviesId);
-        CharacterRest characterToReturn = mapper.map(characterDto, CharacterRest.class);
-        return characterToReturn;
-    }
-
     @DeleteMapping("/{id}")
     public OperationStatusModel deleteCharacter(@PathVariable String id) {
         OperationStatusModel operationStatusModel = new OperationStatusModel();
@@ -131,12 +123,4 @@ public class CharacterController {
 
         return operationStatusModel;
     }
-
-    @DeleteMapping("/{id}/movies")
-    public CharacterRest removeMoviesFromCharacter (@Valid @PathVariable String id, @Valid @RequestBody List<String> moviesId) {
-        CharacterDto characterDto = characterService.removeMoviesFromCharacter(id, moviesId);
-        CharacterRest characterToReturn = mapper.map(characterDto, CharacterRest.class);
-        return characterToReturn;
-    }
-
 }

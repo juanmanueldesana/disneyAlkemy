@@ -94,18 +94,24 @@ public class MovieController {
         return movieToReturn;
     }
 
-
     @PutMapping("/{id}")
     public MovieRest updateMovie(@PathVariable String id, @RequestPart @Valid MovieCreateRequestModel movieCreateRequestModel,
-            @ModelAttribute MultipartFile file) {
+    @ModelAttribute MultipartFile file) {
         MovieDto movieDto = mapper.map(movieCreateRequestModel, MovieDto.class);
-
+        
         if(file == null) {
             throw new RuntimeException("File is required");
         }
-
+        
         MovieDto updatedMovie = movieService.updateMovie(id, movieDto, file);
         MovieRest movieToReturn = mapper.map(updatedMovie, MovieRest.class);
+        return movieToReturn;
+    }
+    
+    @PutMapping("/{movieId}/characters/{characterId}")
+    public MovieRest addCharacterToMovie(@PathVariable String movieId, @PathVariable String characterId) {
+        MovieDto movieDto = movieService.addCharacterToMovie(movieId, characterId);
+        MovieRest movieToReturn = mapper.map(movieDto, MovieRest.class);
         return movieToReturn;
     }
 
@@ -118,6 +124,14 @@ public class MovieController {
         operationStatusModel.setResult("SUCCESS");
         
         return operationStatusModel;
+    }
+
+    @DeleteMapping("/{movieId}/characters/{characterId}")
+    public MovieRest deleteCharacterFromMovie(@PathVariable String movieId, @PathVariable String characterId) {
+
+        MovieDto movieDto = movieService.deleteCharacterFromMovie(movieId, characterId);
+        MovieRest movieToReturn = mapper.map(movieDto, MovieRest.class);
+        return movieToReturn;
     }
 
 

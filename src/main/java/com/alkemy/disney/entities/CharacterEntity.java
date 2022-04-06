@@ -38,7 +38,7 @@ public class CharacterEntity implements Serializable{
     @Column(nullable = false)
     private String history;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "characters")
     private List<MovieEntity> movies;
 
     @OneToOne(cascade = { CascadeType.REMOVE})

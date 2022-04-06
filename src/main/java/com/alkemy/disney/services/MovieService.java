@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.alkemy.disney.entities.CharacterEntity;
 import com.alkemy.disney.entities.GenreEntity;
 import com.alkemy.disney.entities.MovieEntity;
 import com.alkemy.disney.entities.PhotoEntity;
+import com.alkemy.disney.repositories.CharacterRepository;
 import com.alkemy.disney.repositories.GenreRepository;
 import com.alkemy.disney.repositories.MovieRepository;
 import com.alkemy.disney.shared.dto.MovieDto;
@@ -24,6 +26,9 @@ public class MovieService implements MovieServiceInterface{
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private CharacterRepository characterRepository;
 
     @Autowired
     private GenreRepository genreRepository;
@@ -154,6 +159,39 @@ public class MovieService implements MovieServiceInterface{
         for(int i = 0; i < movieDto.getCharacters().size(); i++){
             movieDto.getCharacters().get(i).setMovies(null);
         }
+    }
+
+    @Override
+    public MovieDto addCharacterToMovie(String idMovie, String idCharacter) {
+        
+        MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
+        if(characterEntity != null){
+            movieEntity.getCharacters().add(characterEntity);
+            movieRepository.save(movieEntity);
+            MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDto.setGenre(movieEntity.getGenres().get(0));
+            avoidRecursiveCharacterMovies(movieDto);
+            return movieDto;
+        }
+
+        return null;
+    }
+
+    @Override
+    public MovieDto deleteCharacterFromMovie(String idMovie, String idCharacter) {
+        
+        MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
+        if(characterEntity != null){
+            movieEntity.getCharacters().remove(characterEntity);
+            movieRepository.save(movieEntity);
+            MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
+            movieDto.setGenre(movieEntity.getGenres().get(0));
+            avoidRecursiveCharacterMovies(movieDto);
+            return movieDto;
+        }
+        return null;
     }
     
 }

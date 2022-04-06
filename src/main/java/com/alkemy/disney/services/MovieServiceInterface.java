@@ -14,5 +14,7 @@ public interface MovieServiceInterface {
     public List<MovieDto> getMoviesByName(String name);
     public List<MovieDto> getMoviesByGenre(String genreId);
     public MovieDto updateMovie(String idMovie ,MovieDto movie, MultipartFile file);
+    public MovieDto addCharacterToMovie(String idMovie, String idCharacter);
     public void deleteMovie(String idMovie);
+    public MovieDto deleteCharacterFromMovie(String idMovie, String idCharacter);
 }
