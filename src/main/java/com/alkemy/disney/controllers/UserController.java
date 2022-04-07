@@ -6,6 +6,7 @@ import com.alkemy.disney.models.requests.UserDetailRequestModel;
 import com.alkemy.disney.models.responses.UserRest;
 import com.alkemy.disney.services.UserServiceInterface;
 import com.alkemy.disney.shared.dto.UserDto;
+import com.alkemy.disney.utils.EmailSenderController;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserController {
     private UserServiceInterface userService;
 
     @Autowired
+    private EmailSenderController emailSenderController;
+
+    @Autowired
     private ModelMapper mapper;
 
     @PostMapping(path = "/register")
@@ -30,6 +34,8 @@ public class UserController {
         UserDto userDto = mapper.map(userDetails, UserDto.class);
         UserDto createdUser = userService.registerUser(userDto);
         UserRest userToReturn = mapper.map(createdUser, UserRest.class);
+
+        emailSenderController.sendEmail(userToReturn.getUsername());
         
         return userToReturn;
     }
