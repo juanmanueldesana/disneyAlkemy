@@ -1,6 +1,5 @@
 package com.alkemy.disney.repositories;
 
-import java.util.List;
 
 import com.alkemy.disney.entities.CharacterEntity;
 
@@ -12,7 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface CharacterRepository extends PagingAndSortingRepository<CharacterEntity, Long>, JpaSpecificationExecutor<CharacterEntity> {
 
     CharacterEntity findByCharacterId(String characterId);
-    List<CharacterEntity> findAll(String name, Integer age, Double weight);
-
 }
     
