@@ -49,18 +49,7 @@ public class MovieController {
         MovieRest movieToReturn = mapper.map(createdMovie, MovieRest.class);
         return movieToReturn;
     }
-
-    @GetMapping
-    public List<MovieListRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order) {
-        List<MovieDto> movieDtoList = movieService.getAllMovies(order);
-        List<MovieListRest> movieToReturn = new ArrayList<>();
-        for (MovieDto movieDto : movieDtoList) {
-            MovieListRest movieRest = mapper.map(movieDto, MovieListRest.class);
-            movieToReturn.add(movieRest);
-        }
-        return movieToReturn;
-    }
-
+    
     @GetMapping("/{id}")
     public MovieRest getMovie(@PathVariable String id) {
 
@@ -70,27 +59,16 @@ public class MovieController {
         return movieToReturn;
     }
 
-    @GetMapping(params = "title")
-    public List<MovieRest> getMovieByTitle(@RequestParam String title) {
-
-        List<MovieDto> movieDtoList = movieService.getMoviesByName(title);
-        List<MovieRest> movieToReturn = new ArrayList<>();
+    @GetMapping
+    public List<MovieListRest> getAllMovies(@RequestParam(required=false, defaultValue ="desc") String order,
+                                            @RequestParam(required=false) String name,
+                                            @RequestParam(required=false) String genre) {
+        List<MovieDto> movieDtoList = movieService.getAllMovies(order, name, genre);
+        List<MovieListRest> movieToReturn = new ArrayList<>();
         for (MovieDto movieDto : movieDtoList) {
-            movieToReturn.add(mapper.map(movieDto, MovieRest.class));
+            MovieListRest movieRest = mapper.map(movieDto, MovieListRest.class);
+            movieToReturn.add(movieRest);
         }
-
-        return movieToReturn;
-    }
-
-    @GetMapping(params = "genreId")
-    public List<MovieRest> getMovieByGenre(@RequestParam String genreId) {
-
-        List<MovieDto> movieDtoList = movieService.getMoviesByGenre(genreId);
-        List<MovieRest> movieToReturn = new ArrayList<>();
-        for (MovieDto movieDto : movieDtoList) {
-            movieToReturn.add(mapper.map(movieDto, MovieRest.class));
-        }
-
         return movieToReturn;
     }
 
