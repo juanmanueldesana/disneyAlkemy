@@ -54,45 +54,11 @@ public class CharacterController {
         return characterToReturn;
     }
 
-    @GetMapping(params = "name")
-    public List<CharacterRest> getCharacterByName(@RequestParam String name) {
-
-        List<CharacterDto> characterDtoList = characterService.getCharactersByName(name);
-        List<CharacterRest> characterToReturn = new ArrayList<>();
-        for (CharacterDto characterDto : characterDtoList) {
-            CharacterRest character = mapper.map(characterDto, CharacterRest.class);
-            characterToReturn.add(character);
-        }
-        return characterToReturn;
-    }
-
-    @GetMapping(params = "age")
-    public List<CharacterRest> getCharacterByAge(@RequestParam Integer age) {
-
-        List<CharacterDto> characterDtoList = characterService.getCharactersByAge(age);
-        List<CharacterRest> characterToReturn = new ArrayList<>();
-        for (CharacterDto characterDto : characterDtoList) {
-            CharacterRest character = mapper.map(characterDto, CharacterRest.class);
-            characterToReturn.add(character);
-        }
-        return characterToReturn;
-    }
-
-    @GetMapping(params = "weight")
-    public List<CharacterRest> getCharacterByWeight(@RequestParam Double weight) {
-
-        List<CharacterDto> characterDtoList = characterService.getCharactersByWeight(weight);
-        List<CharacterRest> characterToReturn = new ArrayList<>();
-        for (CharacterDto characterDto : characterDtoList) {
-            CharacterRest character = mapper.map(characterDto, CharacterRest.class);
-            characterToReturn.add(character);
-        }
-        return characterToReturn;
-    }
-
     @GetMapping
-    public List<CharacterListRest> getAllCharacters() {
-        List<CharacterDto> characters = characterService.getAllCharacters();
+    public List<CharacterListRest> getAllCharacters(@RequestParam(required = false) String name, 
+                                                    @RequestParam(required = false) Integer age,
+                                                    @RequestParam(required = false) Double weight) {
+        List<CharacterDto> characters = characterService.getAllCharacters(name, age, weight);
         List<CharacterListRest> charactersToReturn = new ArrayList<>();
         for (CharacterDto characterDto : characters) {
             CharacterListRest characterToReturn = mapper.map(characterDto, CharacterListRest.class);
