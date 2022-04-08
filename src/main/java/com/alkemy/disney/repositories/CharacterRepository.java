@@ -12,9 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface CharacterRepository extends PagingAndSortingRepository<CharacterEntity, Long>, JpaSpecificationExecutor<CharacterEntity> {
 
     CharacterEntity findByCharacterId(String characterId);
-    List<CharacterEntity> findByNameIgnoreCaseContaining(String name);
-    List<CharacterEntity> findByAge(Integer age);
-    List<CharacterEntity> findByWeight(Double weight);
+    List<CharacterEntity> findAll(String name, Integer age, Double weight);
 
 }
     
