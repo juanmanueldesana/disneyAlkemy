@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface PhotoServiceInterface {
 
     public PhotoEntity savePhoto(MultipartFile file);
-    public void deleteOldPhoto(String oldPhotoId);
+    public void deleteOldPhotoFromUpdate(String oldPhotoId);
+    public void deleteOldPhotoFromFiles(String fileName);
 
     
 }

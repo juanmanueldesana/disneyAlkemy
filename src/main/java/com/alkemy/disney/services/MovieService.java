@@ -92,7 +92,7 @@ public class MovieService implements MovieServiceInterface{
         PhotoEntity photo = photoService.savePhoto(file);
         movieEntity.setPhoto(photo);
         movieRepository.save(movieEntity);
-        photoService.deleteOldPhoto(oldPhotoId);
+        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
         
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
         movieDto.setGenre(movieEntity.getGenres().get(0));
@@ -105,8 +105,9 @@ public class MovieService implements MovieServiceInterface{
     public void deleteMovie(String idMovie) {
         
         MovieEntity movieEntity = movieRepository.findByMovieId(idMovie);
+        String oldPhotoId = movieEntity.getPhoto().getFileName();
         movieRepository.delete(movieEntity);
-        
+        photoService.deleteOldPhotoFromFiles(oldPhotoId);
     }
 
     @Override

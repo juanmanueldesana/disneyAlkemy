@@ -70,7 +70,7 @@ public class CharacterService implements CharacterServiceInterface {
         PhotoEntity photo = photoService.savePhoto(file);
         characterEntity.setPhoto(photo);
         characterRepository.save(characterEntity);
-        photoService.deleteOldPhoto(oldPhotoId);
+        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
 
         CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
 
@@ -81,7 +81,9 @@ public class CharacterService implements CharacterServiceInterface {
     public void deleteCharacter(String idCharacter) {
         
         CharacterEntity characterEntity = characterRepository.findByCharacterId(idCharacter);
+        String oldPhotoId = characterEntity.getPhoto().getFileName();
         characterRepository.delete(characterEntity);
+        photoService.deleteOldPhotoFromFiles(oldPhotoId);
         
     }
 

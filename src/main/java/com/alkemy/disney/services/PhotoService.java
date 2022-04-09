@@ -45,7 +45,7 @@ public class PhotoService implements PhotoServiceInterface{
         return null;
     }
 
-    public void deleteOldPhoto(String oldPhotoId) {
+    public void deleteOldPhotoFromUpdate(String oldPhotoId) {
 
             PhotoEntity photoEntity = photoRepository.findById(oldPhotoId).get();
             Path rootPath = Paths.get("web-files").resolve(photoEntity.getFileName()).toAbsolutePath();
@@ -55,6 +55,17 @@ public class PhotoService implements PhotoServiceInterface{
             }
 
             photoRepository.delete(photoEntity);
+    }
+
+    @Override
+    public void deleteOldPhotoFromFiles(String fileName) {
+        
+        Path rootPath = Paths.get("web-files").resolve(fileName).toAbsolutePath();
+        File file = rootPath.toFile();
+        if (file.exists() && file.canRead()) {
+            file.delete();
+        }
+        
     }
 
 }

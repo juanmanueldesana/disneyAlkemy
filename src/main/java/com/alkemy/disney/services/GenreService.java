@@ -75,7 +75,7 @@ public class GenreService implements GenreServiceInterface {
         PhotoEntity photo = photoService.savePhoto(file);
         genreEntity.setPhoto(photo);
         genreRepository.save(genreEntity);
-        photoService.deleteOldPhoto(oldPhotoId);
+        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
 
         GenreDto genreDto = mapper.map(genreEntity, GenreDto.class);
         return genreDto;
@@ -85,10 +85,9 @@ public class GenreService implements GenreServiceInterface {
     public void deleteGenre(String id) {
         
         GenreEntity genreEntity = genreRepository.findByGenreId(id);
+        String oldPhotoId = genreEntity.getPhoto().getFileName();
         genreRepository.delete(genreEntity);
-        
+        photoService.deleteOldPhotoFromFiles(oldPhotoId);
     }
 
-
-    
 }
