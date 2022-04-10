@@ -20,6 +20,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "movies")
 @EntityListeners(AuditingEntityListener.class)
 @Table(indexes = { @Index(columnList = "movieId", name = "movieId_index", unique = true) })
