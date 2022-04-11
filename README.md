@@ -31,3 +31,5 @@ Alkemy Labs Java Challenge
 ![movie-endpoints](/screenshots/movie-endpoints.png)
 
 ![genre-endpoints](/screenshots/genre-endpoints.png)
+
+![email-registration](/screenshots/email-registration%20.png)
