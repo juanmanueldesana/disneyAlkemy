@@ -1,4 +1,4 @@
-package com.alkemy.disney.controllers;
+package com.alkemy.disney;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alkemy.disney.controllers.CharacterController;
 import com.alkemy.disney.entities.CharacterEntity;
 import com.alkemy.disney.entities.MovieEntity;
 import com.alkemy.disney.entities.PhotoEntity;

@@ -3,6 +3,9 @@ package com.alkemy.disney.models.requests;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
+@Data
 public class UserDetailRequestModel {
     
     @NotEmpty(message = "Username is required")
