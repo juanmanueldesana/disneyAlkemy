@@ -6,6 +6,7 @@ Alkemy Labs Java Challenge
 * Java 11
 * Spring Boot
 * XAMPP + MySQL
+* H2 for Tests
 * Lombok
 * JWT
 * ModelMapper
