@@ -66,11 +66,19 @@ public class CharacterService implements CharacterServiceInterface {
         characterEntity.setAge(character.getAge());
         characterEntity.setWeight(character.getWeight());
         characterEntity.setHistory(character.getHistory());
-        String oldPhotoId = characterEntity.getPhoto().getPhotoId();
+        
         PhotoEntity photo = photoService.savePhoto(file);
+
+        if(characterEntity.getPhoto() != null){
+            String oldPhotoId = characterEntity.getPhoto().getPhotoId();
+            characterEntity.setPhoto(photo);
+            characterRepository.save(characterEntity);
+
+            photoService.deleteOldPhotoFromUpdate(oldPhotoId);
+        }
+
         characterEntity.setPhoto(photo);
         characterRepository.save(characterEntity);
-        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
 
         CharacterDto characterDto = mapper.map(characterEntity, CharacterDto.class);
 

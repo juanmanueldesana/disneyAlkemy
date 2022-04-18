@@ -88,11 +88,19 @@ public class MovieService implements MovieServiceInterface{
         movieEntity.setTitle(movie.getTitle());
         movieEntity.setReleaseDate(movie.getReleaseDate());
         movieEntity.setClassification(movie.getClassification());
-        String oldPhotoId = movieEntity.getPhoto().getPhotoId();
+        
         PhotoEntity photo = photoService.savePhoto(file);
+
+        if(movieEntity.getPhoto() != null){
+            String oldPhotoId = movieEntity.getPhoto().getPhotoId();
+            movieEntity.setPhoto(photo);
+            movieRepository.save(movieEntity);
+
+            photoService.deleteOldPhotoFromUpdate(oldPhotoId);
+        }
+
         movieEntity.setPhoto(photo);
         movieRepository.save(movieEntity);
-        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
         
         MovieDto movieDto = mapper.map(movieEntity, MovieDto.class);
         movieDto.setGenre(movieEntity.getGenres().get(0));

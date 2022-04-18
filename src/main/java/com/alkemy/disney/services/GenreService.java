@@ -71,11 +71,19 @@ public class GenreService implements GenreServiceInterface {
         
         GenreEntity genreEntity = genreRepository.findByGenreId(genreId);
         genreEntity.setName(genre.getName());
-        String oldPhotoId = genreEntity.getPhoto().getPhotoId();
         PhotoEntity photo = photoService.savePhoto(file);
+
+
+        if(genreEntity.getPhoto() != null){
+            String oldPhotoId = genreEntity.getPhoto().getPhotoId();
+            genreEntity.setPhoto(photo);
+            genreRepository.save(genreEntity);
+
+            photoService.deleteOldPhotoFromUpdate(oldPhotoId);
+        }
+
         genreEntity.setPhoto(photo);
         genreRepository.save(genreEntity);
-        photoService.deleteOldPhotoFromUpdate(oldPhotoId);
 
         GenreDto genreDto = mapper.map(genreEntity, GenreDto.class);
         return genreDto;
