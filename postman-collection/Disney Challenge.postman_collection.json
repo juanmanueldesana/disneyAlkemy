@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "3081e364-7f1d-4a50-a5e3-641389ffed6c",
+		"name": "Disney Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user endpoints",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"desanajm@gmail.com\",\r\n    \"password\": \"123456\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"desanajm@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "character endpoints",
+			"item": [
+				{
+					"name": "get character",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTU3NzB9.CdQzKfavum-gAJcqZljh39AVDRfrsnQq10AcZwcJWRWoeCweC_azWewScQllkIiWn9IERypvxBqoyfSFmcLetg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/c0ce2028-be92-4095-b57b-091b8c0190f6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"c0ce2028-be92-4095-b57b-091b8c0190f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update character",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTU3NzB9.CdQzKfavum-gAJcqZljh39AVDRfrsnQq10AcZwcJWRWoeCweC_azWewScQllkIiWn9IERypvxBqoyfSFmcLetg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "characterUpdateRequestModel",
+									"value": "{\n    \"name\": \"Leo Di Caprio\",\n    \"age\": \"50\",\n    \"weight\": \"75\",\n    \"history\": \"Participó en peliculas como Titanic\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/batman.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters/c0ce2028-be92-4095-b57b-091b8c0190f6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"c0ce2028-be92-4095-b57b-091b8c0190f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete character",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTU3NzB9.CdQzKfavum-gAJcqZljh39AVDRfrsnQq10AcZwcJWRWoeCweC_azWewScQllkIiWn9IERypvxBqoyfSFmcLetg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/c0ce2028-be92-4095-b57b-091b8c0190f6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"c0ce2028-be92-4095-b57b-091b8c0190f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all characters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTU3NzB9.CdQzKfavum-gAJcqZljh39AVDRfrsnQq10AcZwcJWRWoeCweC_azWewScQllkIiWn9IERypvxBqoyfSFmcLetg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "weight",
+									"value": "100",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create character",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTU3NzB9.CdQzKfavum-gAJcqZljh39AVDRfrsnQq10AcZwcJWRWoeCweC_azWewScQllkIiWn9IERypvxBqoyfSFmcLetg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "characterCreateRequestModel",
+									"value": "{\n    \"name\": \"Leonardo Di Caprio\",\n    \"age\": \"34\",\n    \"weight\": \"72\",\n    \"history\": \"Participó en peliculas como Titanic\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/tomHolland.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movie endpoints",
+			"item": [
+				{
+					"name": "create movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTQ1MDQwMn0.VoqrHQ7om-iEc3vBnTeLaQTmI_e99ckp_QS0jdEi-tlWSwKVp7R9etTq56pr2HTGvQlVcRRVetiiq0JcovatBg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "movieCreateRequestModel",
+									"value": "{\n    \"title\": \"Spiderman\",\n    \"releaseDate\": \"08/08/2009\",\n    \"classification\": 5,\n    \"genreId\":\"2bf3d117-49ed-436f-8430-c65db8432fc7\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/spiderman.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add characters to movie",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTQ1MDQwMn0.VoqrHQ7om-iEc3vBnTeLaQTmI_e99ckp_QS0jdEi-tlWSwKVp7R9etTq56pr2HTGvQlVcRRVetiiq0JcovatBg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/ed71d48f-f747-44bd-ad4e-36a387ab2f14/characters/39dede65-879a-438f-b878-b61d5b5a6785",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"ed71d48f-f747-44bd-ad4e-36a387ab2f14",
+								"characters",
+								"39dede65-879a-438f-b878-b61d5b5a6785"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete characters from movie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTQ1MDQwMn0.VoqrHQ7om-iEc3vBnTeLaQTmI_e99ckp_QS0jdEi-tlWSwKVp7R9etTq56pr2HTGvQlVcRRVetiiq0JcovatBg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/ed71d48f-f747-44bd-ad4e-36a387ab2f14/characters/39dede65-879a-438f-b878-b61d5b5a6785",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"ed71d48f-f747-44bd-ad4e-36a387ab2f14",
+								"characters",
+								"39dede65-879a-438f-b878-b61d5b5a6785"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get movie",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/ed71d48f-f747-44bd-ad4e-36a387ab2f14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"ed71d48f-f747-44bd-ad4e-36a387ab2f14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all movies",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFubWFudWVsLm1hbnVlbDcwQGdtYWlsLmNvbSIsImV4cCI6MTY1MDM4MjM0OX0.K6jCzLFR_wBvxF6IumSWJOZo7cX08rHzkNyY4sQLlzP99OWc8zRoy1wfH7v2JIS8L8ceDV6x5D35H3fweEttMw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "b",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "462b753c-4760-4afe-87ed-ac882f70b1b9",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFubWFudWVsLm1hbnVlbDcwQGdtYWlsLmNvbSIsImV4cCI6MTY1MDM4MjM0OX0.K6jCzLFR_wBvxF6IumSWJOZo7cX08rHzkNyY4sQLlzP99OWc8zRoy1wfH7v2JIS8L8ceDV6x5D35H3fweEttMw",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "movieCreateRequestModel",
+									"value": "{\n    \"title\": \"Batman\",\n    \"releaseDate\": \"08/08/2000\",\n    \"classification\": 5,\n    \"genreId\":\"462b753c-4760-4afe-87ed-ac882f70b1b9\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/batman.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies/ed71d48f-f747-44bd-ad4e-36a387ab2f14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"ed71d48f-f747-44bd-ad4e-36a387ab2f14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete movie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFubWFudWVsLm1hbnVlbDcwQGdtYWlsLmNvbSIsImV4cCI6MTY1MDM4MjM0OX0.K6jCzLFR_wBvxF6IumSWJOZo7cX08rHzkNyY4sQLlzP99OWc8zRoy1wfH7v2JIS8L8ceDV6x5D35H3fweEttMw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/5b683ba7-00d1-47d4-a175-a9ca7a129c9d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"5b683ba7-00d1-47d4-a175-a9ca7a129c9d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "genre endpoints",
+			"item": [
+				{
+					"name": "create genre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "genreCreateRequestModel",
+									"value": "{\n    \"name\": \"Accion\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/rodzilla.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update genre",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "genreUpdateRequestModel",
+									"value": "{\n    \"name\": \"Drama\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "/C:/Users/Juan Manuel/Desktop/imagenes pruebas/trasherNegra3.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/984af8df-7f46-4a5d-aaa9-4730280e2770",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"984af8df-7f46-4a5d-aaa9-4730280e2770"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get genre",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/genres/984af8df-7f46-4a5d-aaa9-4730280e2770",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"984af8df-7f46-4a5d-aaa9-4730280e2770"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all genres",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/genres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete genre",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbWRlc2FuYSIsImV4cCI6MTY0OTk2MzQzOH0.TTIhINvqPwG2ax4RVOwNtRwoGyuuiAPXrPrDlqcQ7gWQTjzjFdG6jZDg1QxJFkLVjAHgyGVlzKb6zEnb4qt1lw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/genres/984af8df-7f46-4a5d-aaa9-4730280e2770",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"984af8df-7f46-4a5d-aaa9-4730280e2770"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZXNhbmFqbUBnbWFpbC5jb20iLCJleHAiOjE2NTExNTY4NjF9.bKizLZ4FWwO2B9jJ1llyMEM4FdWdItejTdayEOup1Vx6Wn5ovVJOKDnugrB4Jwes0TWiyXO510QqxTvKBJtRRw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
